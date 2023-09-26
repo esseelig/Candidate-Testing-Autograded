@@ -8,6 +8,7 @@ let candidateName = "";
 let question = "Who was the first American woman in space? ";
 let correctAnswer = "Sally Ride";
 let candidateAnswer = "";
+// let numCorrectAnswers = 0;
 
 
 //TODO: Variables for Part 2
@@ -31,14 +32,31 @@ for (let i = 0; i < questions.length; i++) {
 }
 
 function gradeQuiz(candidateAnswers) {
-
+  let numCorrectAnswers = 0;
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 // if (candidateAnswer === "Sally Ride") {
 for (let i = 0; i < questions.length; i++) {
 console.log(`
-We asked: "${questions[i]}"
+We asked: "${questions[i].slice(0,-1)}"
 The correct answer was: "${correctAnswers[i]}"
 Your answer was: "${candidateAnswers[i]}"`);
+
+// let currentCandidateAnswer = candidateAnswers[i];
+
+// console.log(`correctAnswers[i].toLowerCase() = ${correctAnswers[i].toLowerCase()}
+// candidateAnswers[i].toLowerCase() = ${candidateAnswers[i].toLowerCase()}`);
+
+if (correctAnswers[i].toLowerCase() === candidateAnswers[i].toLowerCase()) {
+// if (correctAnswers[i] === candidateAnswers[i]) {
+  console.log(`
+That is correct!`);
+  numCorrectAnswers++;
+  } else {
+    console.log(`
+That is incorrect.`);
+  }
+
+
 } // TODO: trim all questions[i] by one character
 
 // if (candidateAnswers[i] === "Sally Ride") {
@@ -49,9 +67,9 @@ Your answer was: "${candidateAnswers[i]}"`);
 // }
 // console.log(`Your Answer: ${candidateAnswer}
 // Correct Answer: Sally Ride`);
-
-  let grade = 0;  //TODO 3.2 use this variable to calculate the candidates score.
-
+// console.log("numCorrectAnswers: " + numCorrectAnswers);
+  let grade = ((numCorrectAnswers / questions.length) * 100);  //TODO 3.2 use this variable to calculate the candidates score.
+  // console.log(grade);
 
   return grade;
 }
@@ -61,7 +79,12 @@ function runProgram() {
   // TODO 1.1c: Greet candidate using their name //
    console.log(`\nHello, ${candidateName}!`);
   askQuestion();
-  gradeQuiz(this.candidateAnswers);
+  // gradeQuiz(this.candidateAnswers);
+  console.log(` 
+-----Your score is:-----
+${gradeQuiz(this.candidateAnswers)}%
+`);
+
 }
 
 // ----------- Don't write any code or change any code below this line ---------- //
